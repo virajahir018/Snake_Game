@@ -100,4 +100,7 @@ addEventListener("keydown", (evt) => {
     if (evt.key === "ArrowDown" && direction !== "up") {
         direction = "down"
     }
+    if (evt.key === "ArrowDown" && direction !== "up") {
+        direction = "down"
+    }
 });
