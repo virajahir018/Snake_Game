@@ -1,9 +1,18 @@
 let board = document.querySelector('.board');
+let button = document.querySelector('.wlc button');
+let wlc = document.querySelector('.wlc');
+let scoreCart = document.querySelector(".score")
+
+let score = 0;
 const rows = 20;
 const cols = 30;
 
 let intervalId = null;
-let food = { x: Math.floor(Math.random() * rows), y: Math.floor(Math.random() * cols) }
+
+let food = {
+    x: Math.floor(Math.random() * rows),
+    y: Math.floor(Math.random() * cols)
+};
 
 const boxes = [];
 const snake = [{ x: 1, y: 3 }];
@@ -38,11 +47,11 @@ function render() {
         head = { x: snake[0].x + 1, y: snake[0].y };
     }
 
-    if (head.x < 0 
-        || head.x >= rows 
-        || head.y < 0 
-        || head.y >= cols 
-        || snake == head.x 
+    if (head.x < 0
+        || head.x >= rows
+        || head.y < 0
+        || head.y >= cols
+        // || snake == head.x
         || snake.slice(1).some(s => s.x == head.x && s.y == head.y)) {
         alert("Game is Over");
         clearInterval(intervalId);
@@ -61,12 +70,27 @@ function render() {
     boxes[`${food.x}-${food.y}`].classList.add("food");
 
     if (head.x == food.x && head.y == food.y) {
+
+        score++;
+        scoreCart.innerText = `Score : ${score}`;
+
         boxes[`${food.x}-${food.y}`].classList.remove("food");
-        food = { x: Math.floor(Math.random() * rows), y: Math.floor(Math.random() * cols) }
+
+
+        do {
+            food = {
+                x: Math.floor(Math.random() * rows),
+                y: Math.floor(Math.random() * cols)
+            };
+        } while (snake.some(s => s.x === food.x && s.y === food.y));
+
         boxes[`${food.x}-${food.y}`].classList.add("food");
 
         snake.unshift(head);
+
+
     }
+
 }
 
 function clearSnake() {
@@ -75,12 +99,12 @@ function clearSnake() {
     });
 }
 
-intervalId = setInterval(() => {
+// intervalId = setInterval(() => {
 
 
-    render();
+//     render();
 
-}, 250);
+// }, 250);
 
 addEventListener("keydown", (evt) => {
 
@@ -100,7 +124,32 @@ addEventListener("keydown", (evt) => {
     if (evt.key === "ArrowDown" && direction !== "up") {
         direction = "down"
     }
-    if (evt.key === "ArrowDown" && direction !== "up") {
-        direction = "down"
+});
+
+button.addEventListener("click", () => {
+    // intervalId = setInterval(() => { render() }, 250)
+    wlc.style.display = "none";
+    if (!intervalId) {
+        intervalId = setInterval(render, 250);
     }
 });
+
+// SPEED
+
+let speed = 250;
+
+// function increaseSpeed() {
+//     if (score % 5 === 0 && speed > 100) {
+//         speed -= 20;
+
+//         clearInterval(intervalId);
+//         intervalId = setInterval(render, speed);
+
+//     }
+
+
+// }
+
+// SCORE 
+
+
