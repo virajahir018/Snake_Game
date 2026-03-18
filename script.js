@@ -2,8 +2,42 @@ let board = document.querySelector('.board');
 let button = document.querySelector('.wlc button');
 let wlc = document.querySelector('.wlc');
 let scoreCart = document.querySelector(".score")
+let highscore = document.querySelector(".highscore")
+let hscore = localStorage.getItem("highscore") || 0;
+let time = document.querySelector(".time")
+let pauseBtn = document.querySelector(".pause");
+let resumeBtn = document.querySelector(".resume");
+let restartBtn = document.querySelector(".restart");
 
+pauseBtn.addEventListener("click",()=>{
+   clearInterval(intervalId);
+   clearInterval(timeId);
+
+});
+
+resumeBtn.addEventListener("click", () => {
+
+    intervalId = setInterval(render, speed);
+
+    time = setInterval(() => {
+        Time++;
+        intervalId(timeId);
+    }, 1000);
+
+});
+
+restartBtn.addEventListener("click", () => {
+
+    location.reload();
+
+});
+
+highscore.innerText = `Highscore : ${hscore}`;
+
+let speed = 250;
 let score = 0;
+let Time = 0;
+let timeId;
 const rows = 20;
 const cols = 30;
 
@@ -37,11 +71,14 @@ function render() {
     if (direction === "left") {
         head = { x: snake[0].x, y: snake[0].y - 1 };
 
+
     } else if (direction === "right") {
         head = { x: snake[0].x, y: snake[0].y + 1 };
 
+
     } else if (direction === "up") {
         head = { x: snake[0].x - 1, y: snake[0].y };
+
 
     } else if (direction === "down") {
         head = { x: snake[0].x + 1, y: snake[0].y };
@@ -55,6 +92,7 @@ function render() {
         || snake.slice(1).some(s => s.x == head.x && s.y == head.y)) {
         alert("Game is Over");
         clearInterval(intervalId);
+        clearInterval(timeId);
     }
 
 
@@ -74,6 +112,14 @@ function render() {
         score++;
         scoreCart.innerText = `Score : ${score}`;
 
+        if (hscore < score) {
+            hscore = score;
+
+            highscore.innerText = `Highscore : ${hscore}`;
+            // localStorage.setItem("highscore", hscore);
+            localStorage.setItem("highscore", hscore);
+        }
+
         boxes[`${food.x}-${food.y}`].classList.remove("food");
 
 
@@ -87,9 +133,8 @@ function render() {
         boxes[`${food.x}-${food.y}`].classList.add("food");
 
         snake.unshift(head);
-
-
     }
+
 
 }
 
@@ -132,11 +177,29 @@ button.addEventListener("click", () => {
     if (!intervalId) {
         intervalId = setInterval(render, 250);
     }
+
+    timeId = setInterval(() => {
+        Time++;
+
+        let hours = Math.floor(Time / 3600);
+        let minutes = Math.floor((Time % 3600) / 60) ;
+        let seconds = Time % 60;
+
+        hours = String(hours).padStart(2, "0");
+        minutes = String(minutes).padStart(2, "0");
+        seconds = String(seconds).padStart(2, "0");
+
+        time.innerText = `Time : ${hours} : ${minutes} : ${seconds}`;
+        updateTime();
+
+    }, 1000)
+
+
 });
 
 // SPEED
 
-let speed = 250;
+// let speed = 250;
 
 // function increaseSpeed() {
 //     if (score % 5 === 0 && speed > 100) {
@@ -151,5 +214,3 @@ let speed = 250;
 // }
 
 // SCORE 
-
-
