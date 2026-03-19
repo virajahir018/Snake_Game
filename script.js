@@ -235,40 +235,18 @@ restartBtn.addEventListener("click", () => {
 
 // 
 
-let startX = 0;
-let startY = 0;
-
-document.addEventListener("touchstart",(e)=>{
-
-startX = e.touches[0].clientX;
-startY = e.touches[0].clientY;
-
-});
-
-document.addEventListener("touchend",(e)=>{
-
-let endX = e.changedTouches[0].clientX;
-let endY = e.changedTouches[0].clientY;
-
-let diffX = endX - startX;
-let diffY = endY - startY;
-
-if(Math.abs(diffX) > Math.abs(diffY)){
-
-if(diffX > 0){
-dir="right";
-}else{
-dir="left";
+document.getElementById("left").onclick = () => {
+    if(direction !== "right") direction = "left";
 }
 
-}else{
-
-if(diffY > 0){
-dir="down";
-}else{
-dir="up";
+document.getElementById("right").onclick = () => {
+    if(direction !== "left") direction = "right";
 }
 
+document.getElementById("up").onclick = () => {
+    if(direction !== "down") direction = "up";
 }
 
-});
+document.getElementById("down").onclick = () => {
+    if(direction !== "up") direction = "down";
+}
