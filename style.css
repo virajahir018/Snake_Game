@@ -139,3 +139,19 @@ box-shadow:
     font-weight: 500;
 }
 
+@media (max-width : 576px) {
+    .infos h2{
+        font-size: 10px;
+        /* display: flex; */
+        padding: 0px 0px;
+        gap: 0px;
+    }
+
+    .board{
+        height: 275px;
+    }
+
+    .box{
+        display: none;
+    }
+}
