@@ -9,28 +9,6 @@ let pauseBtn = document.querySelector(".pause");
 let resumeBtn = document.querySelector(".resume");
 let restartBtn = document.querySelector(".restart");
 
-pauseBtn.addEventListener("click",()=>{
-   clearInterval(intervalId);
-   clearInterval(timeId);
-
-});
-
-resumeBtn.addEventListener("click", () => {
-
-    intervalId = setInterval(render, speed);
-
-    time = setInterval(() => {
-        Time++;
-        intervalId(timeId);
-    }, 1000);
-
-});
-
-restartBtn.addEventListener("click", () => {
-
-    location.reload();
-
-});
 
 highscore.innerText = `Highscore : ${hscore}`;
 
@@ -182,7 +160,7 @@ button.addEventListener("click", () => {
         Time++;
 
         let hours = Math.floor(Time / 3600);
-        let minutes = Math.floor((Time % 3600) / 60) ;
+        let minutes = Math.floor((Time % 3600) / 60);
         let seconds = Time % 60;
 
         hours = String(hours).padStart(2, "0");
@@ -190,27 +168,107 @@ button.addEventListener("click", () => {
         seconds = String(seconds).padStart(2, "0");
 
         time.innerText = `Time : ${hours} : ${minutes} : ${seconds}`;
-        updateTime();
+
 
     }, 1000)
 
 
 });
 
-// SPEED
+function startTimer() {
 
-// let speed = 250;
+    timeId = setInterval(() => {
 
-// function increaseSpeed() {
-//     if (score % 5 === 0 && speed > 100) {
-//         speed -= 20;
+        Time++;
 
-//         clearInterval(intervalId);
-//         intervalId = setInterval(render, speed);
+        let hours = Math.floor(Time / 3600);
+        let minutes = Math.floor((Time % 3600) / 60);
+        let seconds = Time % 60;
 
-//     }
+        hours = String(hours).padStart(2, "0");
+        minutes = String(minutes).padStart(2, "0");
+        seconds = String(seconds).padStart(2, "0");
 
+        time.innerText = `Time : ${hours} : ${minutes} : ${seconds}`;
 
-// }
+    }, 1000);
 
-// SCORE 
+}
+
+pauseBtn.addEventListener("click", () => {
+    clearInterval(intervalId);
+    clearInterval(timeId);
+
+});
+
+resumeBtn.addEventListener("click", () => {
+
+    clearInterval(intervalId);
+    clearInterval(timeId);
+
+    intervalId = setInterval(render, speed);
+
+    timeId = setInterval(() => {
+
+        Time++;
+
+        let hours = Math.floor(Time / 3600);
+        let minutes = Math.floor((Time % 3600) / 60);
+        let seconds = Time % 60;
+
+        hours = String(hours).padStart(2, "0");
+        minutes = String(minutes).padStart(2, "0");
+        seconds = String(seconds).padStart(2, "0");
+
+        time.innerText = `Time : ${hours} : ${minutes} : ${seconds}`;
+        
+
+    }, 1000);
+
+});
+
+restartBtn.addEventListener("click", () => {
+
+    location.reload();
+
+});
+
+// 
+
+let startX = 0;
+let startY = 0;
+
+document.addEventListener("touchstart",(e)=>{
+
+startX = e.touches[0].clientX;
+startY = e.touches[0].clientY;
+
+});
+
+document.addEventListener("touchend",(e)=>{
+
+let endX = e.changedTouches[0].clientX;
+let endY = e.changedTouches[0].clientY;
+
+let diffX = endX - startX;
+let diffY = endY - startY;
+
+if(Math.abs(diffX) > Math.abs(diffY)){
+
+if(diffX > 0){
+dir="right";
+}else{
+dir="left";
+}
+
+}else{
+
+if(diffY > 0){
+dir="down";
+}else{
+dir="up";
+}
+
+}
+
+});
