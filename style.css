@@ -48,9 +48,9 @@ section {
 
 
 .box {
-    /* border: 1px inset #868686; */
-    width: 3.333%;
-    min-height: 30.72px;
+    border: 1px inset #868686;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -150,20 +150,19 @@ section {
     }
 
     .infos {
-        /* flex-direction: column; */
-        /* gap: 8px; */
-        align-items: flex-start;
+        /* justify-content: start; */
+        justify-content: space-between;
     }  
 
     .infos h2 {
-        font-size: 10px;
+        font-size: 15px;
+        padding: 0px 0px;
         /* padding: 6px 10px; */
     }
 
     .board {
         width: 100%;
-        height: auto;
-        aspect-ratio: 6 / 5;
+        height: 400px;
     }
 
     .box {
@@ -171,8 +170,13 @@ section {
         height: calc(100% / 20);
     }
 
-    .box:nth-child(n+490){
+    /* .box:nth-child(n+510){
         display: none;
+    } */
+
+    .btn1{
+        display: flex;
+        justify-content: center;
     }
 
     .pause,
