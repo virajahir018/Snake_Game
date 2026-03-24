@@ -154,7 +154,7 @@ section {
     .infos {
         /* justify-content: start; */
         justify-content: space-between;
-    }  
+    }
 
     .infos h2 {
         font-size: 15px;
@@ -162,7 +162,7 @@ section {
         /* padding: 6px 10px; */
     }
 
-    
+
 
     .board {
         width: 100%;
@@ -174,20 +174,25 @@ section {
         height: calc(100% / 20);
     }
 
-    .snake{
+    .snake {
         /* width: 11.42px; */
         border-radius: 50%;
     }
 
-    .btn1{
+    .btn1 {
         display: flex;
         justify-content: center;
     }
 
     .pause,
-    .resume,
-    .restart {
+    .resume {
         /* width: 100%; */
+        margin: 10px 4.9px;
+        font-size: 14px;
+    }
+
+    .restart {
+        font-weight: bold;
         margin: 10px 4.9px;
         font-size: 14px;
     }
@@ -215,7 +220,7 @@ section {
 }
 
 @media (min-width: 577px) {
-    .controls{
+    .controls {
         display: none;
     }
 }

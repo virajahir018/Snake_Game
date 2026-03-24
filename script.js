@@ -171,8 +171,6 @@ button.addEventListener("click", () => {
 
 
     }, 1000)
-
-
 });
 
 function startTimer() {
@@ -250,3 +248,4 @@ document.getElementById("up").onclick = () => {
 document.getElementById("down").onclick = () => {
     if(direction !== "up") direction = "down";
 }
+
