@@ -207,9 +207,21 @@ section {
         text-align: center;
     }
 
-    .controls button {
+    .controls #left,
+    #right {
         padding: 10px 15px;
-        font-size: 20px;
+        font-size: 22px;
+        margin: 5px;
+        border: none;
+        border-radius: 6px;
+        background: #cd0d0d;
+        color: white;
+    }
+
+    #up,
+    #down {
+        padding: 10px 20px;
+        font-size: 22px;
         margin: 5px;
         border: none;
         border-radius: 6px;
